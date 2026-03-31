@@ -1,0 +1,77 @@
+.page {
+	padding: 20px;
+	display: flex;
+	gap: 10px;
+	justify-content: center;
+}
+
+.actions {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	margin-bottom: 15px;
+}
+
+.actions input {
+	padding: 6px 10px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+.actions button {
+	padding: 6px 12px;
+	border: none;
+	width: 100%;
+	border-radius: 4px;
+	cursor: pointer;
+	background-color: #3b82f6;
+	color: white;
+}
+
+.actions button:disabled {
+	background-color: #9ca3af;
+	cursor: not-allowed;
+}
+
+.list {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.item {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 10px;
+	border: 1px solid #e5e7eb;
+	border-radius: 6px;
+	background: white;
+}
+
+.item:hover {
+	background-color: #f9fafb;
+}
+
+.modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.3);
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.modalContent {
+	background: white;
+	padding: 20px;
+	border-radius: 8px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	min-width: 300px;
+}

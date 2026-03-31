@@ -1,3 +1,4 @@
+import type { GroupType } from "./group";
 import type { UserType } from "./user";
 
-export type { UserType };
+export type { GroupType, UserType };
