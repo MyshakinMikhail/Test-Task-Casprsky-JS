@@ -52,7 +52,9 @@ export default function UsersPage() {
 			.then((res) => res.json())
 			.then((data) => {
 				const filteredData = data.filter((user: UserType) =>
-					user.fullName.includes(searchContent),
+					user.fullName
+						.toLowerCase()
+						.includes(searchContent.toLowerCase()),
 				);
 
 				const sortedData = sortUsers(filteredData, sortParam);

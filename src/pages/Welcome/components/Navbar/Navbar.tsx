@@ -4,6 +4,9 @@ import classes from "./Navbar.module.css";
 export default function Navbar() {
 	return (
 		<nav className={classes.navbar}>
+			<Link type="button" to="welcome">
+				Главная
+			</Link>
 			<Link type="button" to="users">
 				Пользователи
 			</Link>
@@ -12,4 +15,4 @@ export default function Navbar() {
 			</Link>
 		</nav>
 	);
-}	
+}

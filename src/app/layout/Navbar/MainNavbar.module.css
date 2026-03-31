@@ -1,0 +1,15 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+}
+
+.mainHeader {
+	display: flex;
+	flex-direction: column;
+
+	justify-content: center;
+	align-items: center;
+
+	gap: 7px;
+}
