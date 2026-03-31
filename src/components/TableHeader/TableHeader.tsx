@@ -17,7 +17,7 @@ export default function TableHeader({
 				onChange={(e) => handleSelectAllUsers(e.target.checked)}
 			/>
 			<div>Полное имя</div>
-			{/* <div>Учетная запись</div> */}
+			<div>Учетная запись</div>
 			<div>Электронная почта</div>
 			<div>Группа</div>
 			<div>Номер телефона</div>

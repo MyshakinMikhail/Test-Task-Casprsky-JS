@@ -1,0 +1,29 @@
+.form {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	max-width: 600px;
+}
+
+.formItem {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
+
+	padding: 10px;
+	width: 100%;
+}
+
+.formInput {
+	padding: 7px;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.modalButtons {
+	display: flex;
+	gap: 10px;
+	justify-content: center;
+}

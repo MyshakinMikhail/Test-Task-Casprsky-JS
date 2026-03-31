@@ -15,14 +15,22 @@ export default function TableItemList({
 }: Props) {
 	return (
 		<div className={classes.list}>
-			{users.map((user) => (
-				<TableItem
-					key={user.id}
-					item={user}
-					isSelected={selectedUsers.includes(user.id)}
-					handleSelectUser={handleSelectUser}
-				/>
-			))}
+			{users.length === 0 ? (
+				<div style={{ marginTop: "10px" }}>
+					Пользователей не существует, добавьте первого пользователя
+				</div>
+			) : (
+				<>
+					{users.map((user) => (
+						<TableItem
+							key={user.id}
+							item={user}
+							isSelected={selectedUsers.includes(user.id)}
+							handleSelectUser={handleSelectUser}
+						/>
+					))}
+				</>
+			)}
 		</div>
 	);
 }

@@ -31,6 +31,7 @@ export default function TableItem({
 				}}
 			/>
 			<div>{item.fullName}</div>
+			<div>{item.username}</div>
 			<div>{item.email}</div>
 			<div>{item.group}</div>
 			<div>{item.phone}</div>
