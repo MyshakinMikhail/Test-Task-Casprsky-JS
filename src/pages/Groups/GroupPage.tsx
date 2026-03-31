@@ -51,10 +51,12 @@ export default function GroupPage() {
 				<div className={classes.modal}>
 					<div className={classes.modalContent}>
 						<p>Удалить группы?</p>
-						<button onClick={handleDelete}>Да</button>
-						<button onClick={() => setIsWarningOpen(false)}>
-							Нет
-						</button>
+						<div className={classes.buttons}>
+							<button onClick={handleDelete}>Да</button>
+							<button onClick={() => setIsWarningOpen(false)}>
+								Нет
+							</button>
+						</div>
 					</div>
 				</div>
 			)}
