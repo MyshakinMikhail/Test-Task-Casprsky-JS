@@ -2,18 +2,12 @@
 	--text: #6b6375;
 	--text-h: #08060d;
 	--bg: #fff;
-	--border: #e5e4e7;
-	--code-bg: #f4f3ec;
-	--accent: #aa3bff;
-	--accent-bg: rgba(170, 59, 255, 0.1);
-	--accent-border: rgba(170, 59, 255, 0.5);
-	--social-bg: rgba(244, 243, 236, 0.5);
+	--active-bg: #ebebeb;
+	--border: #d6d4d9;
 	--shadow:
 		rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
 
 	--sans: system-ui, "Segoe UI", Roboto, sans-serif;
-	--heading: system-ui, "Segoe UI", Roboto, sans-serif;
-	--mono: ui-monospace, Consolas, monospace;
 
 	font: 18px/145% var(--sans);
 	letter-spacing: 0.18px;
@@ -33,4 +27,61 @@
 a {
 	color: inherit;
 	text-decoration: none;
+}
+
+select {
+	background: var(--bg);
+	border: 1px solid var(--border);
+	border-radius: 6px;
+	font-family: var(--sans);
+	font-size: inherit;
+	padding: 8px 12px;
+	color: var(--text);
+	cursor: pointer;
+	width: fit-content;
+}
+
+option {
+	background: var(--bg);
+	color: var(--text);
+	padding: 8px;
+}
+
+input {
+	width: fit-content;
+	color: var(--text);
+	background: var(--bg);
+	border: 1px solid var(--border);
+	border-radius: 6px;
+	font-family: var(--sans);
+	font-size: inherit;
+}
+
+button {
+	padding: 15px 25px;
+	width: fit-content;
+	border-radius: 15px;
+	background: var(--bg);
+	color: black;
+	border: 1px solid var(--border);
+	font-family: var(--sans);
+	font-size: inherit;
+	transition: all 0.2s ease;
+	cursor: pointer;
+	white-space: nowrap;
+}
+
+button:hover {
+	transform: translateY(-1px);
+	box-shadow: var(--shadow);
+}
+
+button:active {
+	background: var(--active-bg);
+	transform: translateY(0);
+}
+
+button:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
 }

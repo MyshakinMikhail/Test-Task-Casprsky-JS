@@ -1,0 +1,13 @@
+.card {
+	display: grid;
+	grid-template-columns: 0.2fr 1fr 2.2fr 1.3fr 1fr;
+	padding: 12px;
+	border: 1px solid #ddd;
+	align-items: center;
+	box-sizing: border-box;
+	width: 100%;
+}
+
+.haveGroup {
+	background-color: hsla(180, 100%, 50%, 0.2);
+}

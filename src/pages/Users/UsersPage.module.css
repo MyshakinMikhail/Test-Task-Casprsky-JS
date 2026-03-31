@@ -1,0 +1,28 @@
+.page {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	padding: 20px;
+	box-sizing: border-box;
+}
+
+.table {
+	width: 100%;
+	max-width: 1500px;
+	padding: 15px;
+}
+
+.input {
+	width: 100%;
+	box-sizing: border-box;
+	border-radius: 15px;
+	padding: 15px;
+}
+
+.actions {
+	box-sizing: border-box;
+	display: flex;
+	gap: 15px;
+	margin-bottom: 20px;
+}

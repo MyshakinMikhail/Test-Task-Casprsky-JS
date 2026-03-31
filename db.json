@@ -1,0 +1,148 @@
+{
+	"users": [
+		{
+			"id": 1,
+			"fullName": "Alberta Catharine",
+			"username": "AlbertaCatharine",
+			"email": "AlbertaCatharine@companydomain.com",
+			"group": "CDN/CEO",
+			"phone": "+123(456)123-45-66"
+		},
+		{
+			"id": 2,
+			"fullName": "Alexander Suhotin",
+			"username": "AlexanderSuhotin",
+			"email": "AlexanderSuhotin@companydomain.com",
+			"group": "CDN/Managers",
+			"phone": "+123(456)123-45-66"
+		},
+		{
+			"id": 3,
+			"fullName": "Andrey Fedorov",
+			"username": "AndreyFedorov",
+			"email": "AndreyFedorov@companydomain.com",
+			"group": "CDN/Managers",
+			"phone": "+123(456)123-45-66"
+		},
+		{
+			"id": 4,
+			"fullName": "Azobe Cylister",
+			"username": "AzoberCylister",
+			"email": "AzoberCylister@companydomain.com",
+			"group": "Unmanaged",
+			"phone": "+123(456)123-45-66"
+		},
+		{
+			"id": 5,
+			"fullName": "Bree David",
+			"username": "BreeDavid",
+			"email": "BreeDavid@companydomain.com",
+			"group": "CDN/Managers",
+			"phone": "+123(456)123-45-66"
+		},
+		{
+			"id": 6,
+			"fullName": "Breeve Davide",
+			"username": "BreeveDavide",
+			"email": "BreeveDavide@companydomain.com",
+			"group": "CDN/Financials",
+			"phone": "+123(456)123-45-66"
+		},
+		{
+			"id": 7,
+			"fullName": "Carolyn Thersa",
+			"username": "CarolynThersa",
+			"email": "CarolynThersa@companydomain.com",
+			"group": "CDN/Top Kvants",
+			"phone": "+123(456)123-45-66"
+		},
+		{
+			"id": 8,
+			"fullName": "Darlene Cary",
+			"username": "DarleneCarry",
+			"email": "DarleneCarry@companydomain.com",
+			"group": "CDN/Human resources",
+			"phone": "+123(456)123-45-66"
+		},
+		{
+			"id": 9,
+			"fullName": "Gold Dollar",
+			"username": "GoldDollar",
+			"email": "GoldDollar@companydomain.com",
+			"group": "CDN/Managers",
+			"phone": "+123(456)123-45-66"
+		},
+		{
+			"id": 10,
+			"fullName": "Hermelinda Lilia",
+			"username": "HermelindaLilia",
+			"email": "HermelindaLilia@companydomain.com",
+			"group": "CDN/Outsourced",
+			"phone": "+123(456)123-45-66"
+		},
+		{
+			"id": 11,
+			"fullName": "Kylie Fransisca",
+			"username": "KylieFransisca",
+			"email": "KylieFransisca@companydomain.com",
+			"group": "CDN/Kvants",
+			"phone": "+123(456)123-45-66"
+		},
+		{
+			"id": 12,
+			"fullName": "Nikita Mikhailov",
+			"username": "NikitaMikhailov",
+			"email": "NikitaMikhailov@companydomain.com",
+			"group": "CDN/Kvants",
+			"phone": "+123(456)123-45-66"
+		},
+		{
+			"id": 13,
+			"fullName": "Ranae Tawny",
+			"username": "RanaeTawny",
+			"email": "RanaeTawny@companydomain.com",
+			"group": "CDN/Kvants",
+			"phone": "+123(456)123-45-66"
+		},
+		{
+			"id": 14,
+			"fullName": "Sergey Fedotov",
+			"username": "SergeyFedotov",
+			"email": "SergeyFedotov@companydomain.com",
+			"group": "CDN/Managers",
+			"phone": "+123(456)123-45-66"
+		},
+		{
+			"id": 15,
+			"fullName": "Sherley Shaunta",
+			"username": "SherleyShaunta",
+			"email": "SherleyShaunta@companydomain.com",
+			"group": "CDN/Sales",
+			"phone": "+123(456)123-45-66"
+		},
+		{
+			"id": 16,
+			"fullName": "Sordels Photoon",
+			"username": "SordelsPhotoon",
+			"email": "SordelsPhotoon@companydomain.com",
+			"group": "Unmanaged",
+			"phone": "+123(456)123-45-66"
+		},
+		{
+			"id": 17,
+			"fullName": "Travis Jaclyn",
+			"username": "TravisJaclyn",
+			"email": "TravisJaclyn@companydomain.com",
+			"group": "Unmanaged",
+			"phone": "+123(456)123-45-66"
+		},
+		{
+			"id": 18,
+			"fullName": "Victor Osipov",
+			"username": "VictorOsipov",
+			"email": "VictorOsipov@companydomain.com",
+			"group": "Unmanaged",
+			"phone": "+123(456)123-45-66"
+		}
+	]
+}
