@@ -1,73 +1,52 @@
-# React + TypeScript + Vite
+# Управление пользователями и группами
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Тестовое приложение на React для отображения и управления пользователями и их группами. Реализованы три страницы: приветственная, таблица пользователей с CRUD-операциями и страница групп, сгенерированная с помощью LLM.  
+Для стилизации используется UI-кит **Gravity UI**, данные хранятся в **JSON Server**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Запуск проекта
 
-## React Compiler
+1. **Клонируйте репозиторий**  
+   ```bash
+   git clone <url>
+   cd task
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+2. **Установите зависимости** 
+    npm install 
 
-## Expanding the ESLint configuration
+3. **Запустите сервер данных (JSON Server)** 
+    npx json-server db.json --port 3001 - Сервер будет доступен по адресу http://localhost:3001.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+4. **Запустите приложение** 
+    npm run dev - Приложение откроется по адресу http://localhost:5173 (порт может отличаться).
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Бизнес-логика
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+ 1. **Роутинг**
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+  /welcome – страница приветствия.
+  /users – страница со списком пользователей в виде таблицы.
+  /groups – страница, отображающая группы.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+  2. **Страница пользователей**
+  Таблица с колонками: полное имя, учетная запись, email, группа, номере телефона.
+
+  Сортировка: клик выбранному атрибуту переключает порядок (по имени/по группу). Сортировка реализована с использованием useMemo для оптимизации.
+  Поиск: поле ввода фильтрует пользователей по имени.
+  Добавление пользователя: модальное окно с формой (поля: полное имя, учетная запись, email, группа, номере телефона). После отправки данные добавляются и таблица обновляется.
+  Удаление пользователя: кнопка в каждой строке, после подтверждения пользователь удаляется. 
+
+  3. **Страница групп**
+  Сгенерирована с помощью LLM. Отображает список всех групп.
+  Поиск: поле ввода фильтрует группы по названию.
+  
+
+  ## Выводы автора
+
+  ## Проектирование UI вручную (страница пользователей) и Проектирование UI с помощью LLM (страница групп), Сравнение
+  Создание UI вручную потребовало детальной проработки каждого момента, начиная от проектирования UI и написания стилей, заканчивая небольшой оптимизацией, пришлось самостоятельно реализовывать модальные окна и уведомления, а также вести структру проекта. Проектирование при помощи LLM заняло значительно меньше времени, у меня почти сразу появилась большая база кода, которую нужно было тщательно проверить, поскольку генерация, конечно же, произошла с ошибками. В целом генерация выдала результат, который я хотел видеть, не смотря на ошибки
+
+  Таким образом, проектирование при помощи LLM удобная и эффективная вещь, однако нельзя доверять ей полноценное написание приложения, поскольку модели могут допускать мелкие ошибки, которые, например, не произойдут при ручном проектирование, где под контролем находится весь код. Я считаю, что важно уметь использовать LLM в целях ускорения работы с помощью генераций и тщательного ревью, однако нельзя ими злоупотреблять, чтобы не гнать баги в прод. 
