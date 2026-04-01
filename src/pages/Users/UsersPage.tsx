@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { TableHeader, TableItemList } from "../../components";
 import type { UserType } from "../../types";
 import { sortUsers } from "../../utils";
@@ -68,14 +68,14 @@ export default function UsersPage() {
 		}
 	};
 
-	const handleDeleteUsers = useCallback(() => {
+	const handleDeleteUsers = () => {
 		const newUsers = allUsers.filter(
 			(user) => !selectedUsers.includes(user.id),
 		);
 		setAllUsers(newUsers);
 		setIsWarningOpen(false);
 		setSelectedUsers([]);
-	}, [allUsers, selectedUsers]);
+	};
 
 	return (
 		<>

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { GroupType, UserType } from "../../types";
 import classes from "./GroupsPage.module.css";
 import { AddGroupForm } from "./components";
@@ -28,12 +28,12 @@ export default function GroupPage() {
 			});
 	}, []);
 
-	const handleSearchChange = useCallback((value: string) => {
+	const handleSearchChange = (value: string) => {
 		if (debounceTimeout.current) clearTimeout(debounceTimeout.current);
 		debounceTimeout.current = setTimeout(() => {
 			setSearch(value);
 		}, 300);
-	}, []);
+	};
 
 	const filteredGroups = useMemo(() => {
 		if (!search.trim()) return allGroups;
@@ -45,21 +45,21 @@ export default function GroupPage() {
 
 	const groups = filteredGroups;
 
-	const handleSelect = useCallback((id: number, checked: boolean) => {
+	const handleSelect = (id: number, checked: boolean) => {
 		if (checked) {
 			setSelectedGroups((prev) => [...prev, id]);
 		} else {
 			setSelectedGroups((prev) => prev.filter((g) => g !== id));
 		}
-	}, []);
+	};
 
-	const handleDelete = useCallback(() => {
+	const handleDelete = () => {
 		setAllGroups((prev) =>
 			prev.filter((g) => !selectedGroups.includes(g.id)),
 		);
 		setSelectedGroups([]);
 		setIsWarningOpen(false);
-	}, [selectedGroups]);
+	};
 
 	return (
 		<>
