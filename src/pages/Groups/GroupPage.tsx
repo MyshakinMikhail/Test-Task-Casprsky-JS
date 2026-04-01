@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { GroupType, UserType } from "../../types";
 import classes from "./GroupsPage.module.css";
 import { AddGroupForm } from "./components";
@@ -6,11 +6,13 @@ import { AddGroupForm } from "./components";
 const API_URL = "http://localhost:3000/users";
 
 export default function GroupPage() {
-	const [groups, setGroups] = useState<GroupType[]>([]);
+	const [allGroups, setAllGroups] = useState<GroupType[]>([]);
 	const [search, setSearch] = useState("");
 	const [selectedGroups, setSelectedGroups] = useState<number[]>([]);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [isWarningOpen, setIsWarningOpen] = useState(false);
+
+	const debounceTimeout = useRef<ReturnType<typeof setTimeout>>(undefined);
 
 	useEffect(() => {
 		fetch(API_URL)
@@ -22,28 +24,42 @@ export default function GroupPage() {
 					id: index + 1,
 					name: group,
 				}));
-
-				setGroups(
-					uniqueGroups.filter((g) =>
-						g.name.toLowerCase().includes(search.toLowerCase()),
-					),
-				);
+				setAllGroups(uniqueGroups);
 			});
-	}, [search]);
+	}, []);
 
-	const handleSelect = (id: number, checked: boolean) => {
+	const handleSearchChange = useCallback((value: string) => {
+		if (debounceTimeout.current) clearTimeout(debounceTimeout.current);
+		debounceTimeout.current = setTimeout(() => {
+			setSearch(value);
+		}, 300);
+	}, []);
+
+	const filteredGroups = useMemo(() => {
+		if (!search.trim()) return allGroups;
+		const lowerSearch = search.toLowerCase();
+		return allGroups.filter((g) =>
+			g.name.toLowerCase().includes(lowerSearch),
+		);
+	}, [allGroups, search]);
+
+	const groups = filteredGroups;
+
+	const handleSelect = useCallback((id: number, checked: boolean) => {
 		if (checked) {
 			setSelectedGroups((prev) => [...prev, id]);
 		} else {
 			setSelectedGroups((prev) => prev.filter((g) => g !== id));
 		}
-	};
+	}, []);
 
-	const handleDelete = () => {
-		setGroups((prev) => prev.filter((g) => !selectedGroups.includes(g.id)));
+	const handleDelete = useCallback(() => {
+		setAllGroups((prev) =>
+			prev.filter((g) => !selectedGroups.includes(g.id)),
+		);
 		setSelectedGroups([]);
 		setIsWarningOpen(false);
-	};
+	}, [selectedGroups]);
 
 	return (
 		<>
@@ -65,7 +81,7 @@ export default function GroupPage() {
 				<div className={classes.modal}>
 					<div className={classes.modalContent}>
 						<AddGroupForm
-							setGroups={setGroups}
+							setGroups={setAllGroups}
 							setIsModalOpen={setIsModalOpen}
 						/>
 					</div>
@@ -75,8 +91,8 @@ export default function GroupPage() {
 			<div className={classes.page}>
 				<div className={classes.actions}>
 					<input
-						value={search}
-						onChange={(e) => setSearch(e.target.value)}
+						defaultValue={search}
+						onChange={(e) => handleSearchChange(e.target.value)}
 						placeholder="Поиск"
 					/>
 					<button onClick={() => setIsModalOpen(true)}>
@@ -91,6 +107,9 @@ export default function GroupPage() {
 				</div>
 
 				<div className={classes.list}>
+					{groups.length === 0 && (
+						<div>Групп не существует, добавьте первую группу</div>
+					)}
 					{groups.map((group) => (
 						<div key={group.id} className={classes.item}>
 							<input

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { TableHeader, TableItemList } from "../../components";
 import type { UserType } from "../../types";
 import { sortUsers } from "../../utils";
@@ -8,59 +8,74 @@ import { AddUserForm } from "./components";
 const API_URL = "http://localhost:3000/users";
 
 export default function UsersPage() {
-	const [users, setUsers] = useState<UserType[]>([]);
+	const [allUsers, setAllUsers] = useState<UserType[]>([]);
 	const [searchContent, setSearchContent] = useState<string>("");
 	const [sortParam, setSortParam] = useState<string>("name");
 	const [isWarningOpen, setIsWarningOpen] = useState<boolean>(false);
 	const [isAddedUserModalOpen, setIsAddedUserModalOpen] =
 		useState<boolean>(false);
 	const [selectedUsers, setSelectedUsers] = useState<number[]>([]);
-	const [isAllUsersSelected, setIsAllUsersSelected] =
-		useState<boolean>(false);
+
+	const debounceTimeout = useRef<ReturnType<typeof setTimeout>>(undefined);
+
+	useEffect(() => {
+		fetch(API_URL)
+			.then((res) => res.json())
+			.then((data: UserType[]) => setAllUsers(data));
+		return () => {
+			if (debounceTimeout.current) clearTimeout(debounceTimeout.current);
+		};
+	}, []);
+
+	const handleSearchChange = (value: string) => {
+		if (debounceTimeout.current) clearTimeout(debounceTimeout.current);
+		debounceTimeout.current = setTimeout(() => {
+			setSearchContent(value);
+		}, 300);
+	};
+
+	const filteredUsers = useMemo(() => {
+		if (!searchContent.trim()) return allUsers;
+		const lowerSearch = searchContent.toLowerCase();
+		return allUsers.filter((user) =>
+			user.fullName.toLowerCase().includes(lowerSearch),
+		);
+	}, [allUsers, searchContent]);
+
+	const sortedUsers = useMemo(() => {
+		return sortUsers(filteredUsers, sortParam);
+	}, [filteredUsers, sortParam]);
+
+	const users = sortedUsers;
+
+	const isAllUsersSelected = useMemo(() => {
+		return users.length > 0 && selectedUsers.length === users.length;
+	}, [users, selectedUsers]);
 
 	const handleSelectAllUsers = (isChecked: boolean) => {
 		if (!isChecked) {
-			setIsAllUsersSelected(false);
 			setSelectedUsers([]);
 		} else {
-			setIsAllUsersSelected(isChecked);
 			setSelectedUsers(users.map((user) => user.id));
 		}
 	};
 
 	const handleSelectUser = (userId: number, isChecked: boolean) => {
 		if (!isChecked) {
-			setSelectedUsers((prevUsers) =>
-				prevUsers.filter((id: number) => id !== userId),
-			);
+			setSelectedUsers((prev) => prev.filter((id) => id !== userId));
 		} else {
-			setSelectedUsers((prevUsers) => [...prevUsers, userId]);
+			setSelectedUsers((prev) => [...prev, userId]);
 		}
 	};
 
-	const handleDeleteUsers = () => {
-		console.log("delete users");
-		const newUsers = users.filter(
+	const handleDeleteUsers = useCallback(() => {
+		const newUsers = allUsers.filter(
 			(user) => !selectedUsers.includes(user.id),
 		);
-		setUsers(newUsers);
+		setAllUsers(newUsers);
 		setIsWarningOpen(false);
-	};
-
-	useEffect(() => {
-		fetch(API_URL)
-			.then((res) => res.json())
-			.then((data) => {
-				const filteredData = data.filter((user: UserType) =>
-					user.fullName
-						.toLowerCase()
-						.includes(searchContent.toLowerCase()),
-				);
-
-				const sortedData = sortUsers(filteredData, sortParam);
-				setUsers(sortedData);
-			});
-	}, [searchContent, sortParam]);
+		setSelectedUsers([]);
+	}, [allUsers, selectedUsers]);
 
 	return (
 		<>
@@ -82,7 +97,7 @@ export default function UsersPage() {
 				<div className={classes.modal}>
 					<div className={classes.modalContent}>
 						<AddUserForm
-							setUsers={setUsers}
+							setUsers={setAllUsers}
 							setIsAddedUserModalOpen={setIsAddedUserModalOpen}
 						/>
 					</div>
@@ -95,13 +110,9 @@ export default function UsersPage() {
 						<input
 							type="text"
 							className={classes.input}
-							value={searchContent}
-							onChange={(
-								e: React.ChangeEvent<
-									HTMLInputElement,
-									HTMLInputElement
-								>,
-							) => setSearchContent(e.target.value)}
+							defaultValue={searchContent}
+							onChange={(e) => handleSearchChange(e.target.value)}
+							placeholder="Поиск..."
 						/>
 						<select
 							name="filter"
